@@ -30,6 +30,7 @@ export class UsersService {
     return await this.usersRepository.findOne(id);
   }
 
+
   async findOneOrFail(
     conditions: FindConditions<User>,
     options?: FindOneOptions<User>) {
@@ -41,7 +42,7 @@ export class UsersService {
   }
 
   async findByEmail(email: string) {
-    return await this.usersRepository.findOne(email)
+    return await this.usersRepository.findOne({where: {email: email}})
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
