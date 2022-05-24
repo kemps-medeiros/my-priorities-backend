@@ -1,6 +1,6 @@
-import { Controller, Post, Request, UseGuards } from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
+import { Controller, Get, Post, Request, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth/auth.service";
+import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 import { LocalAuthGuard } from "./auth/local-auth.guard";
 
 
@@ -10,11 +10,19 @@ export class AppController {
 
     }
 
-
     @UseGuards(LocalAuthGuard)
     @Post('auth/login')
     async login(@Request() req) {
-        
+
         return this.authService.login(req.user);
     }
+
+    // examplo de rota protegida por autenticação com JWT
+    // @UseGuards(JwtAuthGuard)
+    // @Get('profile')
+    // getProfile(@Request() req) {
+    //     return req.user;
+    // }
+
+
 }
