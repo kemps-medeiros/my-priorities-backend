@@ -1,5 +1,8 @@
+
 import { IsEmail, IsNotEmpty, Matches } from "class-validator";
 import { RegexHelper } from "src/helpers/regex.helper";
+
+
 
 export class CreateUserDto {
     @IsNotEmpty()
@@ -15,4 +18,6 @@ export class CreateUserDto {
     @IsNotEmpty()
     @Matches(RegexHelper.password, {message:'A senha deve conter letras maiusculas, minusculas,  numeros e caracteres especiais' })
     password: string;
+
+    
 }

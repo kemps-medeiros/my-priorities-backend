@@ -33,7 +33,7 @@ export class UsersController {
     @Body() updateUserDto: UpdateUserDto) {
     return await this.usersService.update(id, updateUserDto);
   }
-
+  
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Param('id', new ParseUUIDPipe()) id: string) {
