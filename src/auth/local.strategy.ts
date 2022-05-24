@@ -7,7 +7,10 @@ import { AuthService } from "./auth.service";
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
     constructor(private authService: AuthService) {
-        super()
+        //como padrao, o passport usa o campo "username" no body da requisição para cfazer o login
+        // como quis usar o email, tive que adicionar dentro de "super" um objeto para fazer essa alteracao
+        // e assim o campo capturado no body será o "email" e o "password"
+        super({ usernameField: 'email' })
     }
 
     async validate(email: string, password: string) : Promise<any> {
