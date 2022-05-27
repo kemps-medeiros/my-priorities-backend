@@ -4,6 +4,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
+import { PrioritiesModule } from './priorities/priorities.module';
 
 
 @Module({
@@ -14,7 +15,7 @@ import { AppController } from './app.controller';
     database: process.env.DATABASE_NAME,
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: true,
-  } as TypeOrmModuleOptions), AuthModule],
+  } as TypeOrmModuleOptions), AuthModule, PrioritiesModule],
   controllers: [AppController],
   providers: [],
 })
