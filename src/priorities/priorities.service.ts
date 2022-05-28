@@ -37,6 +37,16 @@ export class PrioritiesService {
     }
   }
 
+  async findDescriptionsByUserId(userId: string) {
+    return await await this.prioritiesRepository.find(
+      {
+        where: { user_id: userId },
+        order: {
+          prioritie_level: "DESC",
+          description: "ASC"}
+      });
+
+  }
 
   async update(id: string, updatePriorityDto: UpdatePriorityDto) {
     const prioritie = await this.findOneOrFail({ id });

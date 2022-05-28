@@ -6,35 +6,41 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('app/api/priorities')
 export class PrioritiesController {
-  constructor(private readonly prioritiesService: PrioritiesService) {}
+  constructor(private readonly prioritiesService: PrioritiesService) { }
 
 
-  @UseGuards(JwtAuthGuard)  
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createPriorityDto: CreatePriorityDto) {
     return await this.prioritiesService.create(createPriorityDto);
   }
-  
-  
-  @UseGuards(JwtAuthGuard)  
+
+
+  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
     return await this.prioritiesService.findAll();
   }
-  
-  @UseGuards(JwtAuthGuard)  
+
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return await this.prioritiesService.findOneOrFail({id});
+    return await this.prioritiesService.findOneOrFail({ id });
   }
-  
-  @UseGuards(JwtAuthGuard)  
+
+  @UseGuards(JwtAuthGuard)
+  @Get('findDescriptionsByUserId/:user_id')
+  async findDescriptions(@Param('user_id') userId: string) {
+    return await this.prioritiesService.findDescriptionsByUserId(userId)
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Put(':id')
   async update(@Param('id', new ParseUUIDPipe()) id: string, @Body() updatePriorityDto: UpdatePriorityDto) {
     return await this.prioritiesService.update(id, updatePriorityDto);
   }
-  
-  @UseGuards(JwtAuthGuard)  
+
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.prioritiesService.remove(id);
