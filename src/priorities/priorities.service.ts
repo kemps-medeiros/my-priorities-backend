@@ -38,7 +38,7 @@ export class PrioritiesService {
   }
 
   async findDescriptionsByUserId(userId: string) {
-    return await await this.prioritiesRepository.find(
+    return await this.prioritiesRepository.find(
       {
         where: { user_id: userId },
         order: {

@@ -4,7 +4,7 @@ import { CreatePriorityDto } from './dto/create-priority.dto';
 import { UpdatePriorityDto } from './dto/update-priority.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@Controller('app/api/priorities')
+@Controller('api/priorities')
 export class PrioritiesController {
   constructor(private readonly prioritiesService: PrioritiesService) { }
 
