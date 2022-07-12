@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -9,15 +14,19 @@ import { User } from './entities/user.entity';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>
-  ) { }
+    private usersRepository: Repository<User>,
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
-    
-    const emailAlreadyExist = await this.usersRepository.findOne({where: {email: createUserDto.email}})
+    const emailAlreadyExist = await this.usersRepository.findOne({
+      where: { email: createUserDto.email },
+    });
     if (emailAlreadyExist) {
-      throw new HttpException('Email User Already Exists', HttpStatus.BAD_REQUEST);
-    } 
+      throw new HttpException(
+        'Email User Already Exists',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     const user = this.usersRepository.create(createUserDto);
     return await this.usersRepository.save(user);
   }
@@ -30,10 +39,10 @@ export class UsersService {
     return await this.usersRepository.findOne(id);
   }
 
-
   async findOneOrFail(
     conditions: FindConditions<User>,
-    options?: FindOneOptions<User>) {
+    options?: FindOneOptions<User>,
+  ) {
     try {
       return await this.usersRepository.findOneOrFail(conditions, options);
     } catch (error) {
@@ -42,7 +51,7 @@ export class UsersService {
   }
 
   async findByEmail(email: string) {
-    return await this.usersRepository.findOne({where: {email: email}})
+    return await this.usersRepository.findOne({ where: { email: email } });
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
