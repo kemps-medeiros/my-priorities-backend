@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+    commands:
+      - echo Installing NestJS...
+      - npm install -g nest
+  pre_build:
+    commands:
+      - echo Installing NPM dependencies...
+      - npm install
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling the Node.js code
+      - npm run build
+  post_build:
+    commands:
+      - echo Build completed on `date`
+
+# Include only the files required for your application to run.
+artifacts:
+  files:
+    - dist/**/*
+    - node_modules/**/*
+    - package.json
