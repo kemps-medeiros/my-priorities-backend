@@ -6,16 +6,19 @@ import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { PrioritiesModule } from './priorities/priorities.module';
 
-
 @Module({
-  imports: [ConfigModule.forRoot(), 
-    UsersModule, 
+  imports: [
+    ConfigModule.forRoot(),
+    UsersModule,
     TypeOrmModule.forRoot({
-    type: process.env.DATABASE_TYPE,
-    database: process.env.DATABASE_NAME,
-    entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    synchronize: true,
-  } as TypeOrmModuleOptions), AuthModule, PrioritiesModule],
+      type: process.env.DATABASE_TYPE,
+      database: process.env.DATABASE_NAME,
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    } as TypeOrmModuleOptions),
+    AuthModule,
+    PrioritiesModule,
+  ],
   controllers: [AppController],
   providers: [],
 })
